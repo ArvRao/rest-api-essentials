@@ -48,7 +48,7 @@ router.delete('/:postId', async (req, res) => {
   }
 })
 
-// UPDATE A POST
+// UPDATE A POST, only updates the title
 router.patch('/:postId', async (req, res) => {
   try {
     const updatedPost = await Post.updateOne(
