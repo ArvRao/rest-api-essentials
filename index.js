@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const app = express()
 const mongoose = require('mongoose')
 require('dotenv/config')
@@ -21,9 +22,19 @@ const customMiddleWare = (req, res, next) => {
 app.use('/posts', PostRoute) // database post request middleware
 // middleware is also called
 
-// ROUTES
+// // ROUTES
 app.get('/', function (req, res) {
-  res.send('This tutorial teaches about res-API essentials')
+  res.sendFile(path.join(__dirname, 'views', 'home.html'))
+})
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'about.html'))
+})
+
+// app.get('/about(.html)?', IntroRoutes.about)
+
+app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'views', 'notFound404.html'))
 })
 
 // CONNECT TO DATABASE
